@@ -7,7 +7,7 @@ describe('example to-do app', () => {
       cy.visit('https://my.gov.au')
       cy.viewport(1536, 960)
     })
-  
+
     it('Test header navigation', () => {
         let home=new HomePage()
         home
@@ -19,16 +19,16 @@ describe('example to-do app', () => {
         .header.goToSignIn()
 
     })
-  
+
     it('Test footer navigation', () => {
         let home=new HomePage()
         home
         .footer.goToAbout()
         .footer.goToHelp()
         .footer.goToContact()
-        // .footer.toFeedback()
+        .footer.goToFeedback()
     })
-  
+
     it('Test top navigator', () => {
         let home=new HomePage()
         home
@@ -40,7 +40,7 @@ describe('example to-do app', () => {
         .topNav.goToEducation()
         .topNav.goToHealthAndDisability()
     })
-  
+
     it('Search for accessibility', () => {
       let home=new HomePage()
         home

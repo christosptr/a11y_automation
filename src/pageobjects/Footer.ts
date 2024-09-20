@@ -1,16 +1,16 @@
 import { HomePage } from "./HomePage"
 import { NavPage } from "./NavPage"
 
-const aboutLink = '.cmp-custom-footer__column__list  a[href*="about.html"]'
-const helpLink = '.cmp-custom-footer__column__list  a[href*="help.html"]'
-const contactLink = '.cmp-custom-footer__column__list  a[href*="contact.html"]'
-const feedbackLink = '.cmp-custom-footer__column__list  a[href*="feedback.html"]'
+const aboutMyGovLink = 'gui-nav-item[href="/en/about"]';
+const helpLink = 'gui-nav-item[href="/en/about/help"]';
+const contactLink = 'gui-nav-item[href="/en/about/help/contact"]';
+const shareFeedbackLink = 'gui-nav-item[href="/en/about/feedback"]';
 
 
 export class Footer {
 
     goToAbout(): NavPage {
-        cy.get(aboutLink).click()
+        cy.get(aboutMyGovLink).click()
         return new NavPage()
     }
 
@@ -25,9 +25,10 @@ export class Footer {
     }
 
     goToFeedback(): NavPage {
-        cy.get(feedbackLink).click()
+        cy.get(shareFeedbackLink).click()
         return new NavPage()
     }
+
 
 }
 
