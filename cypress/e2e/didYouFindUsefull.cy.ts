@@ -1,62 +1,35 @@
-import { HomePage } from "../../src/pageobjects/HomePage"
-import { Usefull } from "../../src/pageobjects/Usefull"
+import { Usefull } from "../../src/pageobjects/Usefull";
 
+describe("WCAG Check Did you find this useful radio buttons attributes", () => {
+  beforeEach(() => {
+    cy.visit("https://my.gov.au/en/services/raising-kids");
+    cy.viewport(1536, 960);
+  });
 
+  describe('Test Yes and No buttons for radio role', () => {
+    it('should check the Yes buttons that has the role of radio', () => {
+      // Select the Yes button by label-text and assert it has role="radio"
+      cy.get('gui-button[label-text="Yes"][value="yes"]')
+      .should('have.attr', 'data-response-type', 'positive') // Assert data-response-type is 'positive'
+      .and('have.attr', 'label-text', 'Yes')                 // Assert label-text is 'Yes'
+      .click() // Click the Yes button
+      .shadow()                                              // Access the Shadow DOM
+      .find('button')                                        // Find the <button> inside the shadow root
+      .should('have.attr', 'role', 'radio')                // Assert role is 'radio'
+      .and('have.attr', 'aria-checked', 'true');             // Assert aria-checked is set to true
+     });
+    it('should check the No button that has the role of radio', () => {
+      // Select the No button by label-text and assert it has role="radio"
+      cy.get('gui-button[label-text="No"][value="no"]')
+        .should('have.attr', 'data-response-type', 'negative')
+        .and('have.attr', 'label-text', 'No')
+        .click() // Click the No button
+        .shadow() // Access the Shadow DOM
+        .find('button') // Find the <button> element inside the shadow root of the gui-button
+        .should('have.attr', 'role', 'radio') // Assert it has the role 'radio'
+        .and('have.attr', 'aria-checked', 'true'); // Assert aria-checked is set to true
+    });
 
-describe('search for a business name', () => {
-    beforeEach(() => {
-      cy.visit('https://my.gov.au/en/services/raising-kids')
-      cy.viewport(1536, 960)
-     // cy.injectAxe();
-      //cy.injectAttest();
-    })
-  
-    //aria-checked=false, role=radio, 
-    it('WCAG Check Did you find this usefull radio buttons attributes', () => {
-      let page=new Usefull()
-          
-    // first a11y test
-    // not working
-    // cy.checkA11y();
+  });
 
-      //Check default Yes radio button state
-      cy.get(page.yesRadioButton())
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'false')
-      .get(page.yesRadioButton())
-      .invoke('attr', 'role')
-      .should('eq', 'radio')
-      //Check default No radio button state
-      .get(page.noRadioButton())
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'false')
-      .get(page.noRadioButton())
-      .invoke('attr', 'role')
-      .should('eq', 'radio')
-       //Check  Yes radio button state when selected
-      .get(page.yesRadioButton()).click()
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'true')
-      .get(page.noRadioButton())
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'false')
-      //Check  No radio button state when selected
-      .get(page.noRadioButton()).click()
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'true')
-      .get(page.yesRadioButton())
-      .invoke('attr', 'aria-checked')
-      .should('eq', 'false')
-
-      //Second Alternative
-      page.checkElementAttributeValue(page.yesRadioButton(),'aria-checked','false');
-      page.checkElementAttributeValue(page.yesRadioButton(),'role','radio');
-      page.clickYesRadio().checkElementAttributeValue(page.yesRadioButton(),'aria-checked','true')
-      page.checkElementAttributeValue(page.noRadioButton(),'aria-checked','false');
-      page.clickNoRadio().checkElementAttributeValue(page.noRadioButton(),'aria-checked','true');
-      page.checkElementAttributeValue(page.yesRadioButton(),'aria-checked','false');
-
-    })
-  
-
-})
+});  // Closing for the outer describe block

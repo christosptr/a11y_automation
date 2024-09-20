@@ -1,8 +1,8 @@
-export const yesRadio = '#yesid'
+export const yesRadio = '#yedid'
 export const noRadio = '#noid'
 
 
-//aria-checked, role radio, 
+//aria-checked, role radio,
 
 export class Usefull {
 
@@ -15,21 +15,21 @@ export class Usefull {
     }
 
     clickYesRadio(): Usefull{
-        cy.get(yesRadio).click()
-        return new Usefull()
+        cy.get(this.getYesRadioButton()).click();
+        return new Usefull(); // Return new instance to ensure type correctness
     }
 
     clickNoRadio(): Usefull {
-        cy.get(noRadio).click()
-        return new Usefull()
+        cy.get(this.getNoRadioButton()).click();
+        return new Usefull(); // Return new instance for type checking
     }
 
-    checkElementAttributeValue(elementName, attributeName: string, attributeValue: string): Usefull {
+    checkElementAttributeValue(elementName: string, attributeName: string, attributeValue: string): Usefull {
         cy
         .get(elementName)
         .invoke('attr', attributeName)
         .should('eq', attributeValue)
-        return new Usefull()
+        return new Usefull(); // Return new instance to ensure type correctness
     }
 
 }
